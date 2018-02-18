@@ -4,10 +4,15 @@ import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import util.datos.UsuarioAlta;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations={"/applicationContextTests.xml"})
 public class ZendeskServiceTest {
 	
 	private static final String UA_NUM_POLIZA = "123456789X";
@@ -19,7 +24,7 @@ public class ZendeskServiceTest {
 	
 	private static final String UA_USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X x.y; rv:42.0) Gecko/20100101 Firefox/42.0";
 
-	//@Autowired
+	@Autowired
 	ZendeskService zendeskService;
 	
 	@Before
@@ -30,17 +35,21 @@ public class ZendeskServiceTest {
 	@Test
 	public void altaTicketZendeskshouldReturnDatosUsuario(){
 		
-		UsuarioAlta usuarioAlta = this.obtainUsuarioAlta();
+		UsuarioAlta usuarioAlta = this.obtenerUsuarioAlta();
 		String userAgent = UA_USER_AGENT;
 		
-		String datosUsuario = zendeskService.altaTicketZendesk(usuarioAlta, userAgent);
+		//String datosUsuarioEsperados = this.obtenerDatosUsuario(usuarioAlta);
 		
-		System.out.println("datosusuario");
-		System.out.println(datosUsuario);
+		// falla la configuración del contexto de Spring y no se pueden inyectar
+		// las dependencias internas de la clase ZendeskService
+		String datosUsuarioResultado = zendeskService.altaTicketZendesk(usuarioAlta, userAgent);
+		
+		//assertEquals(datosUsuarioEsperados, datosUsuarioResultado);
+		
 	}
 	
 	
-	private UsuarioAlta obtainUsuarioAlta(){
+	private UsuarioAlta obtenerUsuarioAlta(){
 		
 		UsuarioAlta usuarioAlta = new UsuarioAlta();
 		

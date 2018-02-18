@@ -33,35 +33,35 @@ import util.datos.UsuarioAlta;
 @Service
 public class ZendeskService {
 
-    /** The Constant LOG. */
+	/** The Constant LOG. */
     private static final Logger LOG = LoggerFactory.getLogger( ZendeskService.class );
 
     private static final String ESCAPED_LINE_SEPARATOR = "\\n";
     private static final String ESCAPE_ER = "\\";
     private static final String HTML_BR = "<br/>";
-    @Value("#{envPC['zendesk.ticket']}")
-    public String PETICION_ZENDESK= "";
+    @Value("${envPC['zendesk.ticket'] ?: 'ZDTICK1234'}")
+    public String PETICION_ZENDESK;
 
-    @Value("#{envPC['zendesk.token']}")
-    public String TOKEN_ZENDESK= "";
+    @Value("${envPC['zendesk.token'] ?: 'ZDTOK1234'}")
+    public String TOKEN_ZENDESK;
 
-    @Value("#{envPC['zendesk.url']}")
-    public String URL_ZENDESK= "";
+    @Value("${envPC['zendesk.url'] ?: 'zendesk.url.com'}")
+    public String URL_ZENDESK;
 
-    @Value("#{envPC['zendesk.user']}")
-    public String ZENDESK_USER= "";
+    @Value("${envPC['zendesk.user'] ?: 'zendeskUser'}")
+    public String ZENDESK_USER;
 
-    @Value("#{envPC['tarjetas.getDatos']}")
-    public String TARJETAS_GETDATOS = "";
+    @Value("${envPC['tarjetas.getDatos'] ?: 'ZDTARDATA1234'}")
+    public String TARJETAS_GETDATOS;
 
-    @Value("#{envPC['cliente.getDatos']}")
-    public String CLIENTE_GETDATOS = "";
+    @Value("${envPC['cliente.getDatos']}")
+    public String CLIENTE_GETDATOS;
 
-    @Value("#{envPC['zendesk.error.mail.funcionalidad']}")
-    public String ZENDESK_ERROR_MAIL_FUNCIONALIDAD = "";
+    @Value("${envPC['zendesk.error.mail.funcionalidad'] ?: 0}")
+    public String ZENDESK_ERROR_MAIL_FUNCIONALIDAD;
 
-    @Value("#{envPC['zendesk.error.destinatario']}")
-    public String ZENDESK_ERROR_DESTINATARIO = "";
+    @Value("${envPC['zendesk.error.destinatario'] ?: support@zendesk.com}")
+    public String ZENDESK_ERROR_DESTINATARIO;
 
     private SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
